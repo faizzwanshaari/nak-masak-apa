@@ -196,6 +196,12 @@ function filtered(){
   );
 }
 
+function countFor(p,s,t){
+  return MENU.filter(d=>
+    (!p||d.p===p)&&(!s||d.s===s)&&(!t||TIME.find(x=>x.k===t).test(d.m))
+  ).length;
+}
+
 /* ---------- RENDER ---------- */
 function render(){
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
@@ -233,7 +239,7 @@ function renderPilih(){
     $app.innerHTML=`${crumbs(1)}<h2>Gaya masakan?</h2>
       <div class="chips">
         <button class="chip ${!S.s?'sel':''}" data-act="pick-s" data-v="">Mana-mana</button>
-        ${STYLE.map(s=>`<button class="chip ${S.s===s?'sel':''}" data-act="pick-s" data-v="${s}">${s}</button>`).join('')}
+        ${STYLE.filter(s=>countFor(S.p,s,null)>0).map(s=>`<button class="chip ${S.s===s?'sel':''}" data-act="pick-s" data-v="${s}">${s} (${countFor(S.p,s,null)})</button>`).join('')}
       </div>
       <div style="margin-top:16px"><button class="btn" data-act="go-time">Seterusnya 🐾</button></div>
       <div style="margin-top:10px"><button class="btn ghost" data-act="back">‹ Kembali</button></div>`;
@@ -242,7 +248,7 @@ function renderPilih(){
   if(S.screen==='time'){
     $app.innerHTML=`${crumbs(2)}<h2>Berapa lama nak masak?</h2>
       <div class="grid">
-        ${TIME.map(t=>`<button class="tile ${S.t===t.k?'sel':''}" data-act="pick-t" data-v="${t.k}"><span class="e">⏱️</span>${t.label}<div class="meta">${t.desc}</div></button>`).join('')}
+        ${TIME.filter(t=>countFor(S.p,S.s,t.k)>0).map(t=>`<button class="tile ${S.t===t.k?'sel':''}" data-act="pick-t" data-v="${t.k}"><span class="e">⏱️</span>${t.label}<div class="meta">${t.desc} · ${countFor(S.p,S.s,t.k)} menu</div></button>`).join('')}
         <button class="tile ${!S.t?'sel':''}" data-act="pick-t" data-v=""><span class="e">✨</span>Mana-mana</button>
       </div>
       <div style="margin-top:16px"><button class="btn" data-act="go-results">Tunjuk menu 😸</button></div>
@@ -358,9 +364,13 @@ function handle(act,v,el){
     case 'pick-p': S.p=v; S.screen='style'; break;
     case 'any-p': S.p=null; S.screen='style'; break;
     case 'pick-s': S.s=v||null; render(); return;
-    case 'go-time': S.screen='time'; break;
+    case 'go-time':
+      if(S.s && countFor(S.p,S.s,null)===0) S.s=null;
+      S.screen='time'; break;
     case 'pick-t': S.t=v||null; render(); return;
-    case 'go-results': S.screen='results'; break;
+    case 'go-results':
+      if(S.t && countFor(S.p,S.s,S.t)===0) S.t=null;
+      S.screen='results'; break;
     case 'back':
       S.screen = S.screen==='time'?'style':S.screen==='style'?'protein':'home';
       break;
