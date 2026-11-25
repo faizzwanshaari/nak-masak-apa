@@ -1,4 +1,4 @@
-const CACHE = 'masak-apa-v4';
+const CACHE = 'masak-apa-v5';
 const FILES = ['./', './index.html', './manifest.json', './icon.svg', './yoshi.jpg'];
 
 self.addEventListener('install', e => {
