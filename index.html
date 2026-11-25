@@ -352,9 +352,10 @@ function renderPilih(){
   if(S.screen==='results'){
     const list=filtered();
     $app.innerHTML=`${crumbs(2)}<h2>Pilihan kau (${list.length})</h2>
+      <button class="btn ghost small" data-act="restart" style="margin-bottom:12px">🔄 Mula semula</button>
       ${list.length?`<div class="card"><button class="btn yellow" data-act="spin">🎰 Pilihkan untuk saya</button></div>`:''}
       ${list.length?list.map(d=>dishRow(d)).join(''):`<div class="card empty">${yoshi(100)}<p style="margin-top:8px">Tak jumpa menu yang sama. Cuba tukar pilihan.</p></div>`}
-      <div style="margin-top:6px"><button class="btn ghost" data-act="restart">🔄 Mula semula</button></div>`;
+      `;
     return;
   }
   if(S.screen==='detail'){
