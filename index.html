@@ -305,7 +305,7 @@ function render(){
 }
 
 function crumbs(step){
-  const labels=['Bahan','Gaya','Masa','Menu'];
+  const labels=['Bahan','Masa','Menu'];
   return `<div class="crumbs">${labels.map((l,i)=>`<span class="${i===step?'on':''}">${i+1}. ${l}</span>`).join(' › ')}</div>`;
 }
 
@@ -340,7 +340,7 @@ function renderPilih(){
     return;
   }
   if(S.screen==='time'){
-    $app.innerHTML=`${crumbs(2)}<h2>Berapa lama nak masak?</h2>
+    $app.innerHTML=`${crumbs(1)}<h2>Berapa lama nak masak?</h2>
       <div class="grid">
         ${TIME.filter(t=>countFor(S.p,S.s,t.k)>0).map(t=>`<button class="tile ${S.t===t.k?'sel':''}" data-act="pick-t" data-v="${t.k}"><span class="e">⏱️</span>${t.label}<div class="meta">${t.desc} · ${countFor(S.p,S.s,t.k)} menu</div></button>`).join('')}
         <button class="tile ${!S.t?'sel':''}" data-act="pick-t" data-v=""><span class="e">✨</span>Mana-mana</button>
@@ -351,7 +351,7 @@ function renderPilih(){
   }
   if(S.screen==='results'){
     const list=filtered();
-    $app.innerHTML=`${crumbs(3)}<h2>Pilihan kau (${list.length})</h2>
+    $app.innerHTML=`${crumbs(2)}<h2>Pilihan kau (${list.length})</h2>
       ${list.length?`<div class="card"><button class="btn yellow" data-act="spin">🎰 Pilihkan untuk saya</button></div>`:''}
       ${list.length?list.map(d=>dishRow(d)).join(''):`<div class="card empty">${yoshi(100)}<p style="margin-top:8px">Tak jumpa menu yang sama. Cuba tukar pilihan.</p></div>`}
       <div style="margin-top:6px"><button class="btn ghost" data-act="restart">🔄 Mula semula</button></div>`;
@@ -455,8 +455,8 @@ function spin(){
 function handle(act,v,el){
   switch(act){
     case 'start': S.screen='protein'; break;
-    case 'pick-p': S.p=v; S.screen='style'; break;
-    case 'any-p': S.p=null; S.screen='style'; break;
+    case 'pick-p': S.p=v; S.s=null; S.screen='time'; break;
+    case 'any-p': S.p=null; S.s=null; S.screen='time'; break;
     case 'pick-s': S.s=v||null; render(); return;
     case 'go-time':
       if(S.s && countFor(S.p,S.s,null)===0) S.s=null;
@@ -466,7 +466,7 @@ function handle(act,v,el){
       if(S.t && countFor(S.p,S.s,S.t)===0) S.t=null;
       S.screen='results'; break;
     case 'back':
-      S.screen = S.screen==='time'?'style':S.screen==='style'?'protein':'home';
+      S.screen='protein';
       break;
     case 'restart': S.p=S.s=S.t=null; S.screen='protein'; break;
     case 'spin': spin(); return;
