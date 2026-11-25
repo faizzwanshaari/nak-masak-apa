@@ -1,18 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="110" fill="#ffd6e2"/>
-  <polygon points="110,190 135,70 235,150" fill="#2b2730"/>
-  <polygon points="402,190 377,70 277,150" fill="#2b2730"/>
-  <polygon points="130,172 142,112 200,150" fill="#ff8fab"/>
-  <polygon points="382,172 370,112 312,150" fill="#ff8fab"/>
-  <ellipse cx="256" cy="290" rx="190" ry="165" fill="#2b2730"/>
-  <ellipse cx="180" cy="265" rx="38" ry="46" fill="#ffe066"/>
-  <ellipse cx="332" cy="265" rx="38" ry="46" fill="#ffe066"/>
-  <ellipse cx="182" cy="272" rx="12" ry="32" fill="#2b2730"/>
-  <ellipse cx="330" cy="272" rx="12" ry="32" fill="#2b2730"/>
-  <circle cx="188" cy="250" r="9" fill="#fff"/>
-  <circle cx="338" cy="250" r="9" fill="#fff"/>
-  <ellipse cx="135" cy="340" rx="30" ry="17" fill="#ff8fab" opacity=".8"/>
-  <ellipse cx="377" cy="340" rx="30" ry="17" fill="#ff8fab" opacity=".8"/>
-  <path d="M236 330 h40 l-20 20z" fill="#ff8fab"/>
-  <path d="M256 350 q-18 20 -36 6 M256 350 q18 20 36 6" stroke="#ff8fab" stroke-width="10" fill="none" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="44" fill="#ffd6e2"/>
+  <path d="M40 92 L46 40 L92 74 Z" fill="#2b2730"/>
+  <path d="M160 92 L154 40 L108 74 Z" fill="#2b2730"/>
+  <path d="M52 80 L55 56 L77 72 Z" fill="#ff8fab"/>
+  <path d="M148 80 L145 56 L123 72 Z" fill="#ff8fab"/>
+  <ellipse cx="100" cy="116" rx="64" ry="54" fill="#2b2730"/>
+  <path d="M60 114 Q74 96 88 114" stroke="#ffe066" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M112 114 Q126 96 140 114" stroke="#ffe066" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="62" cy="130" rx="9" ry="6" fill="#ff8fab" opacity=".8"/>
+  <ellipse cx="138" cy="130" rx="9" ry="6" fill="#ff8fab" opacity=".8"/>
+  <path d="M93 126 L107 126 L100 133 Z" fill="#ff8fab"/>
+  <path d="M100 133 Q94 141 88 137 M100 133 Q106 141 112 137" stroke="#ff8fab" stroke-width="3" fill="none" stroke-linecap="round"/>
 </svg>

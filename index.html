@@ -71,7 +71,7 @@ p{margin:0}
 .meta{font-size:14px;color:var(--muted)}
 .heart{font:inherit;font-size:26px;background:none;border:0;cursor:pointer;padding:4px}
 
-.yoshi{display:block;margin:0 auto;object-fit:cover;object-position:50% 30%;border-radius:50%;border:4px solid var(--line);box-shadow:0 5px 0 var(--line);background:#fff;animation:bob 2.6s ease-in-out infinite}
+.yoshi{display:block;margin:0 auto;animation:bob 2.6s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .hero{text-align:center;padding:6px 0 2px}
 .bubble{
@@ -226,7 +226,22 @@ let shop=store.get('shop',[]);
 
 /* ---------- YOSHI ---------- */
 function yoshi(size=120){
-  return `<img class="yoshi" src="yoshi.jpg" alt="Yoshi, kucing hitam" width="${size}" height="${size}">`;
+  return `<svg class="yoshi" width="${size}" height="${size}" viewBox="0 0 200 200" role="img" aria-label="Yoshi, kucing hitam">
+    <circle cx="100" cy="100" r="96" fill="#ffd6e2" stroke="#2b2730" stroke-width="5"/>
+    <path d="M40 92 L46 40 L92 74 Z" fill="#2b2730"/>
+    <path d="M160 92 L154 40 L108 74 Z" fill="#2b2730"/>
+    <path d="M52 80 L55 56 L77 72 Z" fill="#ff8fab"/>
+    <path d="M148 80 L145 56 L123 72 Z" fill="#ff8fab"/>
+    <ellipse cx="100" cy="116" rx="64" ry="54" fill="#2b2730"/>
+    <path d="M60 114 Q74 96 88 114" stroke="#ffe066" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M112 114 Q126 96 140 114" stroke="#ffe066" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <ellipse cx="62" cy="130" rx="9" ry="6" fill="#ff8fab" opacity=".8"/>
+    <ellipse cx="138" cy="130" rx="9" ry="6" fill="#ff8fab" opacity=".8"/>
+    <path d="M93 126 L107 126 L100 133 Z" fill="#ff8fab"/>
+    <path d="M100 133 Q94 141 88 137 M100 133 Q106 141 112 137" stroke="#ff8fab" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M36 124 L14 120 M36 132 L14 136 M164 124 L186 120 M164 132 L186 136" stroke="#2b2730" stroke-width="3" stroke-linecap="round"/>
+    <path d="M160 40 L163 47 L170 50 L163 53 L160 60 L157 53 L150 50 L157 47 Z" fill="#ffe066"/>
+  </svg>`;
 }
 
 /* ---------- STATE ---------- */
