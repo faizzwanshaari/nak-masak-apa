@@ -1,0 +1,20 @@
+{
+  "name": "Nak Masak Apa? 🐱",
+  "short_name": "Masak Apa",
+  "description": "Pilih lauk hari ni dengan Yoshi.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff4f7",
+  "theme_color": "#ffb3c6",
+  "lang": "ms",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

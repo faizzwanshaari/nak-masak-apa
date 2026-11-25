@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#ffd6e2"/>
+  <polygon points="110,190 135,70 235,150" fill="#2b2730"/>
+  <polygon points="402,190 377,70 277,150" fill="#2b2730"/>
+  <polygon points="130,172 142,112 200,150" fill="#ff8fab"/>
+  <polygon points="382,172 370,112 312,150" fill="#ff8fab"/>
+  <ellipse cx="256" cy="290" rx="190" ry="165" fill="#2b2730"/>
+  <ellipse cx="180" cy="265" rx="38" ry="46" fill="#ffe066"/>
+  <ellipse cx="332" cy="265" rx="38" ry="46" fill="#ffe066"/>
+  <ellipse cx="182" cy="272" rx="12" ry="32" fill="#2b2730"/>
+  <ellipse cx="330" cy="272" rx="12" ry="32" fill="#2b2730"/>
+  <circle cx="188" cy="250" r="9" fill="#fff"/>
+  <circle cx="338" cy="250" r="9" fill="#fff"/>
+  <ellipse cx="135" cy="340" rx="30" ry="17" fill="#ff8fab" opacity=".8"/>
+  <ellipse cx="377" cy="340" rx="30" ry="17" fill="#ff8fab" opacity=".8"/>
+  <path d="M236 330 h40 l-20 20z" fill="#ff8fab"/>
+  <path d="M256 350 q-18 20 -36 6 M256 350 q18 20 36 6" stroke="#ff8fab" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg>
