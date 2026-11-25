@@ -128,11 +128,11 @@ p{margin:0}
 const PROTEIN=[
   {k:'ayam',label:'Ayam',e:'🍗'},
   {k:'daging',label:'Daging',e:'🥩'},
-  {k:'ikan',label:'Ikan',e:'🐟'},
-  {k:'seafood',label:'Seafood',e:'🦐'},
+  {k:'sotong',label:'Sotong',e:'🦑'},
   {k:'telur',label:'Telur',e:'🥚'},
-  {k:'sayur',label:'Sayur',e:'🥬'}
+  {k:'udang',label:'Udang',e:'🦐'}
 ];
+const ALLOWED=PROTEIN.map(x=>x.k);
 const STYLE=['Kering','Berkuah','Goreng','Bakar','Tumis'];
 const TIME=[
   {k:'cepat',label:'Cepat',desc:'bawah 15 min',test:m=>m<=15},
@@ -153,8 +153,8 @@ const MENU=[
   {id:'asam-pedas-ikan',n:'Asam Pedas Ikan',e:'🐠',p:'ikan',s:'Berkuah',m:30,ing:['Ikan 500g','Asam jawa','Cili kering','Bawang merah','Tomato','Serai','Bendi'],st:'Tumis rempah. Masukkan air asam, tomato dan serai. Masak sebentar, kemudian masukkan ikan dan bendi.'},
   {id:'ikan-bakar',n:'Ikan Bakar',e:'🐟',p:'ikan',s:'Bakar',m:25,ing:['Ikan 2 ekor','Cili kering','Bawang merah','Asam jawa','Garam','Kunyit'],st:'Lumurkan ikan dengan sambal. Bakar atas api sederhana sambil sapu minyak.'},
   {id:'ikan-lemak-cili-api',n:'Ikan Masak Lemak Cili Api',e:'🐡',p:'ikan',s:'Berkuah',m:25,ing:['Ikan 500g','Santan','Cili api','Kunyit','Asam keping','Daun kesum'],st:'Tumis rempah sampai wangi. Tuang santan dan air, masukkan ikan dan asam. Masak perlahan.'},
-  {id:'sotong-goreng-tepung',n:'Sotong Goreng Tepung',e:'🦑',p:'seafood',s:'Goreng',m:15,ing:['Sotong 300g','Tepung gandum','Tepung jagung','Garam','Serbuk lada','Minyak'],st:'Potong sotong dan salut dengan tepung. Goreng dalam minyak panas sampai keemasan.'},
-  {id:'udang-masak-sambal',n:'Udang Masak Sambal',e:'🦐',p:'seafood',s:'Tumis',m:15,ing:['Udang 300g','Sambal tumis','Bawang besar','Daun limau purut','Gula'],st:'Tumis sambal sampai pecah minyak. Masukkan udang dan kacau sampai masak.'},
+  {id:'sotong-goreng-tepung',n:'Sotong Goreng Tepung',e:'🦑',p:'sotong',s:'Goreng',m:15,ing:['Sotong 300g','Tepung gandum','Tepung jagung','Garam','Serbuk lada','Minyak'],st:'Potong sotong dan salut dengan tepung. Goreng dalam minyak panas sampai keemasan.'},
+  {id:'udang-masak-sambal',n:'Udang Masak Sambal',e:'🦐',p:'udang',s:'Tumis',m:15,ing:['Udang 300g','Sambal tumis','Bawang besar','Daun limau purut','Gula'],st:'Tumis sambal sampai pecah minyak. Masukkan udang dan kacau sampai masak.'},
   {id:'telur-dadar',n:'Telur Dadar',e:'🍳',p:'telur',s:'Goreng',m:8,ing:['Telur 3 biji','Bawang besar','Cili padi','Garam','Minyak'],st:'Pukul telur dengan bawang dan cili. Goreng dalam minyak panas sampai masak.'},
   {id:'telur-balado',n:'Telur Balado',e:'🥚',p:'telur',s:'Tumis',m:12,ing:['Telur rebus 4 biji','Cili merah','Bawang besar','Tomato','Gula'],st:'Belah telur dan goreng sekejap. Tumis sambal balado, masukkan telur.'},
   {id:'sayur-campur',n:'Sayur Campur',e:'🥗',p:'sayur',s:'Tumis',m:10,ing:['Kobis','Carrot','Taugeh','Bawang putih','Kicap','Garam'],st:'Tumis bawang putih. Masukkan sayur, kacau cepat dengan api besar. Perisakan dan angkat.'},
@@ -165,9 +165,9 @@ const MENU=[
   {id:'sate-daging',n:'Sate Daging',e:'🍢',p:'daging',s:'Bakar',m:40,ing:['Daging hiris','Kicap','Serbuk kunyit','Gula','Ketumbar','Kacang tanah untuk kuah'],st:'Perap daging dengan rempah, cucuk pada lidi. Bakar sambil sapu minyak, hidangkan dengan kuah kacang.'},
   {id:'ikan-bilis-sambal',n:'Ikan Bilis Sambal',e:'🐟',p:'ikan',s:'Kering',m:20,ing:['Ikan bilis 1 cawan','Cili kering','Bawang merah','Belacan','Asam jawa','Gula'],st:'Goreng ikan bilis sampai rangup. Tumis sambal, masukkan ikan bilis dan kacau sampai sambal kering.'},
   {id:'ikan-tumis-sambal',n:'Ikan Tumis Sambal',e:'🐠',p:'ikan',s:'Tumis',m:15,ing:['Ikan 300g','Sambal tumis','Bawang besar','Daun limau purut','Gula'],st:'Goreng ikan sekejap. Tumis sambal sampai pecah minyak, masukkan ikan dan kacau perlahan.'},
-  {id:'sotong-kering-sambal',n:'Sotong Kering Sambal',e:'🦑',p:'seafood',s:'Kering',m:25,ing:['Sotong 300g','Cili kering','Bawang merah','Belacan','Gula','Asam jawa'],st:'Tumis sambal kering dengan belacan. Masukkan sotong dan kacau sampai kering dan sebati.'},
-  {id:'sup-seafood',n:'Sup Seafood',e:'🍲',p:'seafood',s:'Berkuah',m:30,ing:['Udang 200g','Sotong 150g','Sayur campur','Bawang putih','Halia','Sos tiram','Kiub ayam'],st:'Tumis bawang putih dan halia. Masukkan air dan kiub ayam, masak sayur, kemudian masukkan seafood.'},
-  {id:'udang-bakar',n:'Udang Bakar',e:'🦐',p:'seafood',s:'Bakar',m:15,ing:['Udang besar 300g','Mentega','Bawang putih','Lemon','Serbuk lada','Garam'],st:'Lumurkan udang dengan mentega dan bawang putih. Bakar sampai masak, hidangkan dengan perahan lemon.'},
+  {id:'sotong-kering-sambal',n:'Sotong Kering Sambal',e:'🦑',p:'sotong',s:'Kering',m:25,ing:['Sotong 300g','Cili kering','Bawang merah','Belacan','Gula','Asam jawa'],st:'Tumis sambal kering dengan belacan. Masukkan sotong dan kacau sampai kering dan sebati.'},
+  {id:'sup-seafood',n:'Sup Seafood',e:'🍲',p:'sotong',s:'Berkuah',m:30,ing:['Udang 200g','Sotong 150g','Sayur campur','Bawang putih','Halia','Sos tiram','Kiub ayam'],st:'Tumis bawang putih dan halia. Masukkan air dan kiub ayam, masak sayur, kemudian masukkan seafood.'},
+  {id:'udang-bakar',n:'Udang Bakar',e:'🦐',p:'udang',s:'Bakar',m:15,ing:['Udang besar 300g','Mentega','Bawang putih','Lemon','Serbuk lada','Garam'],st:'Lumurkan udang dengan mentega dan bawang putih. Bakar sampai masak, hidangkan dengan perahan lemon.'},
   {id:'telur-sambal-kering',n:'Telur Sambal Kering',e:'🥚',p:'telur',s:'Kering',m:15,ing:['Telur rebus 4 biji','Cili kering','Bawang merah','Gula','Asam jawa','Minyak'],st:'Goreng telur sampai keemasan. Tumis sambal kering, gulingkan telur dalam sambal.'},
   {id:'telur-pindang',n:'Telur Pindang',e:'🥚',p:'telur',s:'Berkuah',m:25,ing:['Telur 4 biji','Kicap','Bawang putih','Serai','Lengkuas','Gula','Asam keping'],st:'Rebus telur sampai masak, kupas dan calar sedikit. Masak dalam kuah kicap dengan rempah sampai telur berwarna.'},
   {id:'tempeh-goreng-kering',n:'Tempeh Goreng Kering',e:'🟫',p:'sayur',s:'Kering',m:15,ing:['Tempeh 200g','Cili kering','Bawang putih','Gula','Garam','Minyak'],st:'Goreng tempeh sampai rangup. Tumis sambal kering, masukkan tempeh dan kacau sampai sebati.'},
@@ -192,13 +192,13 @@ const MENU=[
   {id:'otak-otak-ikan',n:'Otak-Otak Ikan',e:'🍢',p:'ikan',s:'Bakar',m:25,ing:['Ikan parut 300g','Santan','Tepung ubi','Cili kisar','Daun kesum','Garam'],st:'Campur semua bahan jadi doh. Bungkus dengan daun pisang dan bakar atas api sederhana sampai masak.'},
   {id:'ikan-masak-kicap',n:'Ikan Masak Kicap',e:'🐠',p:'ikan',s:'Tumis',m:20,ing:['Ikan 400g','Kicap manis','Bawang besar','Bawang putih','Halia','Cili padi'],st:'Goreng ikan sekejap. Tumis bawang, halia dan cili, masukkan kicap dan ikan. Kacau perlahan.'},
   {id:'ikan-masak-halia',n:'Ikan Masak Halia',e:'🐟',p:'ikan',s:'Berkuah',m:25,ing:['Ikan 400g','Halia','Bawang putih','Kicap','Cili padi','Daun bawang'],st:'Tumis halia dan bawang putih. Masukkan air dan kicap, rebus ikan sampai masak. Tabur daun bawang.'},
-  {id:'sotong-masak-kicap',n:'Sotong Masak Kicap',e:'🦑',p:'seafood',s:'Tumis',m:15,ing:['Sotong 300g','Kicap manis','Bawang besar','Bawang putih','Cili hijau'],st:'Tumis bawang dan bawang putih. Masukkan sotong dan kicap, kacau cepat sampai sotong masak.'},
-  {id:'udang-goreng-tepung',n:'Udang Goreng Tepung',e:'🍤',p:'seafood',s:'Goreng',m:15,ing:['Udang 300g','Tepung gandum','Tepung jagung','Garam','Serbuk lada','Minyak'],st:'Salut udang dengan tepung. Goreng dalam minyak panas sampai rangup dan keemasan.'},
-  {id:'kerang-masak-halia',n:'Kerang Masak Halia',e:'🐚',p:'seafood',s:'Tumis',m:15,ing:['Kerang 500g','Halia','Bawang putih','Cili padi','Kicap','Daun bawang'],st:'Tumis halia dan bawang putih. Masukkan kerang dan kicap, tutup periuk sampai kerang terbuka.'},
-  {id:'gulai-ketam',n:'Gulai Ketam',e:'🦀',p:'seafood',s:'Berkuah',m:40,ing:['Ketam 3 ekor','Santan','Rempah gulai','Kunyit','Asam keping','Bendi'],st:'Tumis rempah gulai. Masukkan ketam dan air, rebus sebentar, kemudian tuang santan dan bendi.'},
-  {id:'ketam-masak-cili',n:'Ketam Masak Cili',e:'🦀',p:'seafood',s:'Tumis',m:25,ing:['Ketam 2 ekor','Sos cili','Sos tomato','Bawang putih','Telur 1 biji','Gula'],st:'Tumis bawang putih dan sos. Masukkan ketam, masak sampai ketam merah, kemudian tuang telur.'},
-  {id:'sotong-bakar-cili',n:'Sotong Bakar Cili',e:'🦑',p:'seafood',s:'Bakar',m:15,ing:['Sotong 2 ekor','Cili padi','Bawang putih','Lemon','Minyak zaitun','Garam'],st:'Lumurkan sotong dengan cili dan bawang. Bakar cepat atas api besar sampai sedikit hangus.'},
-  {id:'udang-kering-goreng-pedas',n:'Udang Kering Goreng Pedas',e:'🦐',p:'seafood',s:'Kering',m:15,ing:['Udang kering 100g','Cili kering','Bawang merah','Gula','Asam jawa','Minyak'],st:'Goreng udang kering sampai rangup. Tumis cili dan bawang, masukkan udang dan kacau sampai kering.'},
+  {id:'sotong-masak-kicap',n:'Sotong Masak Kicap',e:'🦑',p:'sotong',s:'Tumis',m:15,ing:['Sotong 300g','Kicap manis','Bawang besar','Bawang putih','Cili hijau'],st:'Tumis bawang dan bawang putih. Masukkan sotong dan kicap, kacau cepat sampai sotong masak.'},
+  {id:'udang-goreng-tepung',n:'Udang Goreng Tepung',e:'🍤',p:'udang',s:'Goreng',m:15,ing:['Udang 300g','Tepung gandum','Tepung jagung','Garam','Serbuk lada','Minyak'],st:'Salut udang dengan tepung. Goreng dalam minyak panas sampai rangup dan keemasan.'},
+  {id:'kerang-masak-halia',n:'Kerang Masak Halia',e:'🐚',p:'sotong',s:'Tumis',m:15,ing:['Kerang 500g','Halia','Bawang putih','Cili padi','Kicap','Daun bawang'],st:'Tumis halia dan bawang putih. Masukkan kerang dan kicap, tutup periuk sampai kerang terbuka.'},
+  {id:'gulai-ketam',n:'Gulai Ketam',e:'🦀',p:'udang',s:'Berkuah',m:40,ing:['Ketam 3 ekor','Santan','Rempah gulai','Kunyit','Asam keping','Bendi'],st:'Tumis rempah gulai. Masukkan ketam dan air, rebus sebentar, kemudian tuang santan dan bendi.'},
+  {id:'ketam-masak-cili',n:'Ketam Masak Cili',e:'🦀',p:'udang',s:'Tumis',m:25,ing:['Ketam 2 ekor','Sos cili','Sos tomato','Bawang putih','Telur 1 biji','Gula'],st:'Tumis bawang putih dan sos. Masukkan ketam, masak sampai ketam merah, kemudian tuang telur.'},
+  {id:'sotong-bakar-cili',n:'Sotong Bakar Cili',e:'🦑',p:'sotong',s:'Bakar',m:15,ing:['Sotong 2 ekor','Cili padi','Bawang putih','Lemon','Minyak zaitun','Garam'],st:'Lumurkan sotong dengan cili dan bawang. Bakar cepat atas api besar sampai sedikit hangus.'},
+  {id:'udang-kering-goreng-pedas',n:'Udang Kering Goreng Pedas',e:'🦐',p:'udang',s:'Kering',m:15,ing:['Udang kering 100g','Cili kering','Bawang merah','Gula','Asam jawa','Minyak'],st:'Goreng udang kering sampai rangup. Tumis cili dan bawang, masukkan udang dan kacau sampai kering.'},
   {id:'telur-masak-kicap',n:'Telur Masak Kicap',e:'🥚',p:'telur',s:'Tumis',m:10,ing:['Telur 3 biji','Kicap manis','Bawang besar','Cili padi','Minyak'],st:'Goreng telur dadar kasar. Tumis bawang dan cili, masukkan telur dan kicap, kacau sebati.'},
   {id:'omelet-sayur',n:'Omelet Sayur',e:'🍳',p:'telur',s:'Goreng',m:10,ing:['Telur 3 biji','Kobis','Carrot','Bawang besar','Garam','Minyak'],st:'Halus sayur, campur dengan telur dan garam. Goreng dalam minyak sederhana sampai masak.'},
   {id:'kari-telur',n:'Kari Telur',e:'🍛',p:'telur',s:'Berkuah',m:25,ing:['Telur rebus 4 biji','Serbuk kari','Santan','Kentang','Bawang besar','Daun kari'],st:'Tumis bawang dan serbuk kari. Masukkan kentang dan air, kemudian santan. Masukkan telur dan masak sebentar.'},
@@ -249,7 +249,7 @@ function yoshi(size=120){
 }
 
 /* ---------- STATE ---------- */
-const S={tab:'pilih',screen:'home',p:null,s:null,t:null,openId:null,spinning:false};
+const S={tab:'pilih',screen:'protein',p:null,s:null,t:null,openId:null,spinning:false};
 const $app=document.getElementById('app');
 
 function toast(msg){
@@ -262,7 +262,7 @@ function saveShop(){store.set('shop',shop)}
 
 function filtered(){
   return MENU.filter(d=>
-    (!S.p||d.p===S.p)&&
+    (S.p?d.p===S.p:ALLOWED.includes(d.p))&&
     (!S.s||d.s===S.s)&&
     (!S.t||TIME.find(x=>x.k===S.t).test(d.m))
   );
@@ -270,7 +270,7 @@ function filtered(){
 
 function countFor(p,s,t){
   return MENU.filter(d=>
-    (!p||d.p===p)&&(!s||d.s===s)&&(!t||TIME.find(x=>x.k===t).test(d.m))
+    (p?d.p===p:ALLOWED.includes(d.p))&&(!s||d.s===s)&&(!t||TIME.find(x=>x.k===t).test(d.m))
   ).length;
 }
 
@@ -302,7 +302,7 @@ function renderPilih(){
     return;
   }
   if(S.screen==='protein'){
-    $app.innerHTML=`${crumbs(0)}<h2>Hari ni nak makan apa?</h2>
+    $app.innerHTML=`<div class="hero">${yoshi(96)}</div>${crumbs(0)}<h2>Hari ni nak makan apa?</h2>
       <div class="grid">${PROTEIN.map(p=>`<button class="tile" data-act="pick-p" data-v="${p.k}"><span class="e">${p.e}</span>${p.label}</button>`).join('')}</div>
       <div style="margin-top:14px"><button class="btn ghost" data-act="any-p">🎲 Apa-apa pun boleh</button></div>`;
     return;
@@ -446,7 +446,7 @@ function handle(act,v,el){
     case 'back':
       S.screen = S.screen==='time'?'style':S.screen==='style'?'protein':'home';
       break;
-    case 'restart': S.p=S.s=S.t=null; S.screen='home'; break;
+    case 'restart': S.p=S.s=S.t=null; S.screen='protein'; break;
     case 'spin': spin(); return;
     case 'open': S.openId=v; S.screen='detail'; window.scrollTo(0,0); break;
     case 'back-results': S.screen='results'; break;
