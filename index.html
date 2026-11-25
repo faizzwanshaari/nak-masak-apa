@@ -296,6 +296,14 @@ function countFor(p,s,t){
   ).length;
 }
 
+function timeChips(){
+  const opts=TIME.filter(t=>countFor(S.p,null,t.k)>0);
+  return `<div class="chips" style="margin-bottom:12px">
+    <button class="chip ${!S.t?'sel':''}" data-act="pick-t" data-v="">Semua</button>
+    ${opts.map(t=>`<button class="chip ${S.t===t.k?'sel':''}" data-act="pick-t" data-v="${t.k}">${t.label} (${countFor(S.p,null,t.k)})</button>`).join('')}
+  </div>`;
+}
+
 /* ---------- RENDER ---------- */
 function render(){
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
@@ -305,7 +313,7 @@ function render(){
 }
 
 function crumbs(step){
-  const labels=['Bahan','Masa','Menu'];
+  const labels=['Bahan','Menu'];
   return `<div class="crumbs">${labels.map((l,i)=>`<span class="${i===step?'on':''}">${i+1}. ${l}</span>`).join(' › ')}</div>`;
 }
 
@@ -351,7 +359,7 @@ function renderPilih(){
   }
   if(S.screen==='results'){
     const list=filtered();
-    $app.innerHTML=`${crumbs(2)}<h2>Pilihan kau (${list.length})</h2>
+    $app.innerHTML=`${crumbs(1)}<h2>Pilihan kau (${list.length})</h2>${timeChips()}
       <button class="btn ghost small" data-act="restart" style="margin-bottom:12px">🔄 Mula semula</button>
       ${list.length?`<div class="card"><button class="btn yellow" data-act="spin">🎰 Pilihkan untuk saya</button></div>`:''}
       ${list.length?list.map(d=>dishRow(d)).join(''):`<div class="card empty">${yoshi(100)}<p style="margin-top:8px">Tak jumpa menu yang sama. Cuba tukar pilihan.</p></div>`}
@@ -456,8 +464,8 @@ function spin(){
 function handle(act,v,el){
   switch(act){
     case 'start': S.screen='protein'; break;
-    case 'pick-p': S.p=v; S.s=null; S.screen='time'; break;
-    case 'any-p': S.p=null; S.s=null; S.screen='time'; break;
+    case 'pick-p': S.p=v; S.s=null; S.t=null; S.screen='results'; break;
+    case 'any-p': S.p=null; S.s=null; S.t=null; S.screen='results'; break;
     case 'pick-s': S.s=v||null; render(); return;
     case 'go-time':
       if(S.s && countFor(S.p,S.s,null)===0) S.s=null;
